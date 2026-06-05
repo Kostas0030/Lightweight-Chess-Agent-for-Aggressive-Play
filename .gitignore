@@ -216,3 +216,16 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Large model files
+*.pth
+
+# Large data files
+*.pkl
+data/database/
+data/tablebase/
+data/self_play_data/
+
+# OS
+.DS_Store
+Thumbs.db
