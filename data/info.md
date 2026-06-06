@@ -8,6 +8,6 @@ The files for this folder are not included in this repository due to size limita
 
 ## How to get the files
 
-You can download them from the [Releases](../../releases) page of this repository.
+You can download them from the [Releases](https://github.com/Kostas0030/Lightweight-Chess-Agent-for-Aggressive-Play/releases) page of this repository.
 
 After downloading, place them in this folder so the directory structure is preserved.
