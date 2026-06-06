@@ -1,4 +1,4 @@
-# model/aggressive — Files Not Included
+# model/aggressive - Files Not Included
 
 The aggressive model files are not included in this repository due to size limitations.
 
