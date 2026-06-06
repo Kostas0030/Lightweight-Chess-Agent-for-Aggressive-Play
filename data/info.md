@@ -4,7 +4,7 @@ The files for this folder are not included in this repository due to size limita
 
 ## What belongs here
 
-`filtered_positions_from_database.pkl` — the filtered chess positions extracted from the Lichess database, used as training data for the supervised learning phase.
+`filtered_positions_from_database.pkl` — the filtered midgame chess positions that are needed for the self-play data generation process of the baseline implementation.
 
 ## How to get the files
 
