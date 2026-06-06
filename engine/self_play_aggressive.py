@@ -13,7 +13,7 @@ import torch
 from tqdm import tqdm
 
 from syzygy import tablebase_best_move
-from mcts_game_parallel_aggressive import MCTSBatch, Node
+from mcts_aggressive import MCTSBatch, Node
 from auxiliary_func import initialize_policy_model, initialize_value_model
 
 # =========================
