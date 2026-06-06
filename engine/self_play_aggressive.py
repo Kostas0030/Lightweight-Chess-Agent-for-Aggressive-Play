@@ -1,10 +1,8 @@
-# CURRENT BEST
-
-# self_play_batch_no_counter.py
 import os
 import random
 import pickle
 from collections import namedtuple
+from multiprocessing import Pool
 
 import chess
 from chess import syzygy, polyglot
@@ -22,7 +20,7 @@ from auxiliary_func import initialize_policy_model, initialize_value_model
 GameData = namedtuple("GameData", ["position", "pi", "z"])
 
 # =========================
-# Worker initialization (no counter)
+# Worker initialization
 # =========================
 _worker_runner = None
 
@@ -35,7 +33,7 @@ def _play_worker(start_positions):
     return _worker_runner.play_batch(start_positions)
 
 # =========================
-# Self-Play Runner (Batch, No Counter)
+# Self-Play Runner (Batch)
 # =========================
 class SelfPlayRunnerBatch:
     def __init__(
@@ -250,8 +248,6 @@ class SelfPlayRunnerBatch:
 
         print(f"Using {num_processes} processes")
 
-        from multiprocessing import Pool  # local import
-
         with Pool(
             processes=num_processes,
             initializer=_init_worker,
@@ -288,9 +284,9 @@ class SelfPlayRunnerBatch:
 # ENTRY POINT
 # =========================
 if __name__ == "__main__":
-    policy_path = "model/POLICY_MODEL_10EPOCHS_V3.pth"
-    value_path = "model/VALUE_MODEL_10EPOCHS_V3.pth"
-    save_path = "data/self_play_data/aggressive/lambda_0.5/V3_100_1m.pkl"
+    policy_path = "model/POLICY_MODEL_10EPOCHS_V0.pth"
+    value_path = "model/VALUE_MODEL_10EPOCHS_V0.pth"
+    save_path = "data/self_play_data/aggressive/V0.pkl"
 
     runner = SelfPlayRunnerBatch(
         policy_path,
