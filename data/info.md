@@ -1,4 +1,4 @@
-# [folder name] — Files Not Included
+# filtered_positions_from_database.pkl — Files Not Included
 
 The files for this folder are not included in this repository due to size limitations.
 
