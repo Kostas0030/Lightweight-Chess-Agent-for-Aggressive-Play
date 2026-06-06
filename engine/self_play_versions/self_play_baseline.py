@@ -11,7 +11,7 @@ import numpy as np
 import torch
 from tqdm import tqdm
 
-from initial_mcts_leaf_par import MCTS
+from mcts_baseline import MCTS
 from auxiliary_func import initialize_policy_model, initialize_value_model
 
 
