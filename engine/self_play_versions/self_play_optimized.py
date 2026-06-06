@@ -11,7 +11,7 @@ import numpy as np
 import torch
 from tqdm import tqdm
 
-from mcts import MCTS
+from mcts_optimized import MCTS
 from auxiliary_func import initialize_policy_model, initialize_value_model
 from syzygy import tablebase_best_move
 
