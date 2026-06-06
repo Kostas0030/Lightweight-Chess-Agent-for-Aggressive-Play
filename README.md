@@ -286,6 +286,8 @@ Three levels of biasing were applied to shape the agent's playing style toward a
 
 ### Game Length Analysis (Move Threshold — % of games ending within N moves)
 
+**Aggressive Agent:**
+
 | Pipeline Iteration | ≤20 | ≤30 | ≤40 | >40 |
 |---|---|---|---|---|
 | Aggressive Iter 1 | 0.0% | 6.6% | 16.6% | 83.4% |
@@ -293,6 +295,8 @@ Three levels of biasing were applied to shape the agent's playing style toward a
 | Aggressive Iter 3 | 1.3% | 11.7% | 22.1% | 77.9% |
 | Aggressive Iter 4 | 4.9% | 18.3% | 26.8% | 73.2% |
 | Aggressive Iter 5 | 5.1% | 19.2% | 28.5% | 71.5% |
+
+**Normal Agent:**
 
 | Pipeline Iteration | ≤20 | ≤30 | ≤40 | >40 |
 |---|---|---|---|---|
