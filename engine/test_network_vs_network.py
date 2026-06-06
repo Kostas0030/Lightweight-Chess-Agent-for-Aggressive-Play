@@ -6,7 +6,7 @@ import numpy as np
 from tqdm import tqdm
 from collections import defaultdict
 from multiprocessing import Pool, cpu_count
-from predict import initialize_policy_model, initialize_value_model
+from auxiliary_func import initialize_policy_model, initialize_value_model
 from syzygy import tablebase_best_move
 from mcts_tt_tb import MCTS
 from chess import syzygy
