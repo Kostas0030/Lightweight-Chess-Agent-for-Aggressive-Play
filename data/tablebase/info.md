@@ -11,6 +11,5 @@ Syzygy endgame tablebases — binary files used for perfect endgame play when �
 You can download the Syzygy tablebases for free from the official source:
 
 - [Syzygy tablebases — 3-4-5 piece](https://syzygy-tables.info)
-- [Lichess mirror](https://tablebase.lichess.ovh)
 
 After downloading, place the `.rtbw` and `.rtbz` files in this folder.
