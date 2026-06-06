@@ -153,8 +153,6 @@ The engine uses PUCT-based MCTS with four phases repeated for `n` simulations:
 
 After `n` simulations, a move is sampled from the visit count distribution over the root's children.
 
-**Dirichlet noise** (α=0.3, ε=0.25) is added to the root's priors during self-play to encourage exploration.
-
 ### Training Pipeline
 
 The full pipeline follows an iterative AlphaZero-style loop:
@@ -266,6 +264,16 @@ Three levels of biasing were applied to shape the agent's playing style toward a
 | Iteration 4 | 168 | 234 | 98 | 63.2% |
 | Iteration 5 | 166 | 243 | 91 | 64.6% |
 
+**Optimized Agent:**
+
+| Pipeline Iteration | New Wins | Draws | Old Wins | Win % (cumulative vs baseline) |
+|---|---|---|---|---|
+| Iteration 1 | 137 | 266 | 97 | 58.5% |
+| Iteration 2 | 172 | 225 | 103 | 62.6% |
+| Iteration 3 | 177 | 226 | 97 | 64.6% |
+| Iteration 4 | 184 | 217 | 99 | 65% |
+| Iteration 5 | 175 | 234 | 91 | 65.8% |
+
 **Aggressive Agent:**
 
 | Pipeline Iteration | New Wins | Draws | Old Wins | Win % (cumulative vs baseline) |
@@ -275,6 +283,34 @@ Three levels of biasing were applied to shape the agent's playing style toward a
 | Iteration 3 | 161 | 248 | 91 | 64.5% |
 | Iteration 4 | 165 | 246 | 89 | 64.9% |
 | Iteration 5 | 166 | 246 | 88 | 65.4% |
+
+### Game Length Analysis (Move Threshold — % of games ending within N moves)
+
+| Pipeline Iteration | ≤20 | ≤30 | ≤40 | >40 |
+|---|---|---|---|---|
+| Aggressive Iter 1 | 0.0% | 6.6% | 16.6% | 83.4% |
+| Aggressive Iter 2 | 0.4% | 7.4% | 18.2% | 81.8% |
+| Aggressive Iter 3 | 1.3% | 11.7% | 22.1% | 77.9% |
+| Aggressive Iter 4 | 4.9% | 18.3% | 26.8% | 73.2% |
+| Aggressive Iter 5 | 5.1% | 19.2% | 28.5% | 71.5% |
+
+| Pipeline Iteration | ≤20 | ≤30 | ≤40 | >40 |
+|---|---|---|---|---|
+| Normal Iter 1 | 0.0% | 8.2% | 12.3% | 87.7% |
+| Normal Iter 2 | 2.4% | 10.2% | 18.5% | 81.5% |
+| Normal Iter 3 | 1.1% | 10.6% | 16.1% | 83.9% |
+| Normal Iter 4 | 0.0% | 7.1% | 13.1% | 86.9% |
+| Normal Iter 5 | 1.2% | 3.3% | 15.6% | 84.4% |
+
+The aggressive agent consistently plays shorter, more decisive games.
+
+### EAS-Score (Engine Aggressiveness Score)
+
+A custom composite metric measuring playing aggressiveness:
+- **EAS-Sacs:** frequency of material sacrifices (giving up material for positional/tactical compensation)
+- **EAS-Shorts:** how quickly the engine finishes games
+
+The aggressive agent scores higher on both components compared to the normal agent across all pipeline iterations.
 
 ### Final Evaluation (vs Torch800, 500 games via Cutechess)
 
@@ -291,24 +327,6 @@ Three levels of biasing were applied to shape the agent's playing style toward a
 | Aggressive | Normal | 167–184–149 | 53.4% | +10 ±3 |
 
 Aggressive play creates practical tactical pressure, increasing the likelihood of opponent mistakes at this playing level.
-
-### Game Length Analysis (Move Threshold — % of games ending within N moves)
-
-| Pipeline Iteration | ≤20 | ≤30 | ≤40 | >40 |
-|---|---|---|---|---|
-| Aggressive Iter 1 | 0.0% | 6.6% | 16.6% | 83.4% |
-| Aggressive Iter 5 | 5.1% | 19.2% | 28.5% | 71.5% |
-| Normal Iter 5 | 1.2% | 3.3% | 15.6% | 84.4% |
-
-The aggressive agent consistently plays shorter, more decisive games.
-
-### EAS-Score (Engine Aggressiveness Score)
-
-A custom composite metric measuring playing aggressiveness:
-- **EAS-Sacs:** frequency of material sacrifices (giving up material for positional/tactical compensation)
-- **EAS-Shorts:** how quickly the engine finishes games
-
-The aggressive agent scores higher on both components compared to the normal agent across all pipeline iterations.
 
 ---
 
@@ -333,11 +351,18 @@ python engine.py
 
 The engine communicates via UCI protocol and can be connected to any UCI-compatible chess GUI (e.g., Arena, Cutechess, Lucas Chess).
 
+### Running Self-Play Data Generation
+
+```bash
+cd engine
+python self_play.py
+```
+
 ### Running Self-Play Training
 
 ```bash
 cd engine
-python pipeline.py
+python self_play_training.py
 ```
 
 ### Testing Networks Against Each Other
