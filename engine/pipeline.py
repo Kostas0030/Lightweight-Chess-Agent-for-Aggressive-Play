@@ -1,7 +1,7 @@
 import os
 import torch
-from self_play_game_parallel_aggressive import SelfPlayRunnerBatch  
-from self_play_train import SelfPlayTrainer   
+from self_play_aggressive import SelfPlayRunnerBatch  
+from self_play_training import SelfPlayTrainer   
 from collections import namedtuple
 
 GameData = namedtuple("GameData", ["position", "pi", "z"])
@@ -11,7 +11,7 @@ def main():
     print(f"Using device: {device}")
 
     # ================== CONFIG ==================
-    START_VERSION = 4
+    START_VERSION = 0
     NUM_ITERATIONS = 10                  
     SAMPLES_PER_ITERATION = 1_000_000
     NUM_PROCESSES = 16
@@ -22,7 +22,7 @@ def main():
     TRAIN_BATCH_SIZE = 256
     LR = 1e-4
 
-    DATA_DIR = "data/self_play_data/aggressive/lambda_0.5/"
+    DATA_DIR = "data/self_play_data/aggressive/"
     os.makedirs(DATA_DIR, exist_ok=True)
     # ============================================
 
@@ -36,7 +36,7 @@ def main():
         print(f"{'='*70}")
 
         # === 1. Create new data file for this version ===
-        data_path = f"data/self_play_data/aggressive/lambda_0.5/V{version}_100_1m.pkl"
+        data_path = f"data/self_play_data/aggressive/V{version}.pkl"
 
         runner = SelfPlayRunnerBatch(
             policy_path=current_policy,
