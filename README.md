@@ -359,7 +359,7 @@ The engine communicates via UCI protocol and can be connected to any UCI-compati
 
 ```bash
 cd engine
-python self_play.py
+python self_play_aggressive.py
 ```
 
 ### Running Self-Play Training
@@ -373,7 +373,7 @@ python self_play_training.py
 
 ```bash
 cd engine
-python test_network_vs_network.py
+python self_play_testing.py
 ```
 
 ---
